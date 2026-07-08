@@ -1,0 +1,379 @@
+@import "tailwindcss";
+
+:root {
+  --surface-0: #f4f3ef;
+  --surface-1: #eceae3;
+  --surface-2: #ffffff;
+  --text-primary: #1f1f1d;
+  --text-secondary: #5f5e5a;
+  --text-muted: #888780;
+  --border: #d8d6cd;
+  --radius: 8px;
+
+  --green-50: #EAF3DE; --green-800: #27500A;
+  --amber-50: #FAEEDA; --amber-800: #633806;
+  --red-50: #FCEBEB;   --red-800: #791F1F;
+  
+  --transition-speed: 0.2s;
+}
+
+/* Elegant Dark Mode Variables with identical warm minimalist style */
+html.dark, :root[data-theme="dark"] {
+  --surface-0: #141412;
+  --surface-1: #1d1c18;
+  --surface-2: #252420;
+  --text-primary: #f5f4f0;
+  --text-secondary: #b3b1aa;
+  --text-muted: #7c7a72;
+  --border: #3a3934;
+
+  --green-50: #1e2f15;
+  --green-800: #a3e26b;
+  --amber-50: #332511;
+  --amber-800: #f1b34e;
+  --red-50: #3b1616;
+  --red-800: #ff8f8f;
+}
+
+* {
+  box-sizing: border-box;
+  /* Smooth theme transitions */
+  transition: background-color var(--transition-speed) ease, 
+              border-color var(--transition-speed) ease, 
+              color var(--transition-speed) ease,
+              box-shadow var(--transition-speed) ease;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  background: var(--surface-0);
+  color: var(--text-primary);
+  margin: 0;
+  padding: 2rem;
+}
+
+/* Dashboard Wrapper */
+.wrap {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Header Container for Dashboard Name & Toggle */
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.25rem;
+  gap: 16px;
+}
+
+h1 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 4px;
+}
+
+.subhead {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Summary Grid */
+.summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.summary-card {
+  background: var(--surface-1);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+
+.summary-card p:first-child {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0 0 4px;
+}
+
+.summary-card p:last-child {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Action Controls Row */
+.controls {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+button.control-btn {
+  background: transparent;
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  color: var(--text-primary);
+}
+
+button.control-btn:hover {
+  background: var(--surface-1);
+}
+
+button.control-btn.active {
+  background: var(--surface-1);
+  border-color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Row List Container */
+#rows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Individual Equipment Risk Card */
+.card {
+  background: var(--surface-2);
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color var(--transition-speed);
+}
+
+.card:hover {
+  border-color: var(--text-muted);
+}
+
+.row {
+  padding: 0.85rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+}
+
+.score-box {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.score-box span {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Colored Score Tiers */
+.tier-red {
+  background: var(--red-50);
+  color: var(--red-800);
+}
+.tier-orange {
+  background: var(--amber-50);
+  color: var(--amber-800);
+}
+.tier-yellow {
+  background: var(--amber-50);
+  color: var(--amber-800);
+}
+.tier-green {
+  background: var(--green-50);
+  color: var(--green-800);
+}
+
+.badge {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: var(--radius);
+}
+
+.row-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.row-main .title-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.row-main .title-line p {
+  font-weight: 600;
+  font-size: 15px;
+  margin: 0;
+}
+
+.row-main .sub {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 2px 0 0;
+}
+
+.row-action {
+  text-align: right;
+  max-width: 240px;
+}
+
+.row-action p:first-child {
+  font-size: 13px;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.row-action p:last-child {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 2px 0 0;
+}
+
+.chevron {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  transition: transform var(--transition-speed);
+  color: var(--text-muted);
+}
+
+.card.open .chevron {
+  transform: rotate(180deg);
+}
+
+/* Detail Section Expansion Panel */
+.detail {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-in-out;
+  border-top: 0px solid transparent;
+}
+
+.card.open .detail {
+  max-height: 500px;
+  border-top: 0.5px solid var(--border);
+}
+
+.detail-inner {
+  padding: 1rem 1.25rem 1.1rem;
+  background: var(--surface-0);
+}
+
+.detail-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  margin: 0 0 8px;
+}
+
+/* Sub-score Badges Grid */
+.subscores {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.subscore-item {
+  background: var(--surface-2);
+  border: 0.5px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+
+.subscore-item p:first-child {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin: 0 0 2px;
+}
+
+.subscore-item p:last-child {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.subscore-item .weight {
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+/* Scoring Formula Row */
+.formula-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--text-secondary);
+  padding-top: 8px;
+  border-top: 0.5px solid var(--border);
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.formula-row code {
+  font-size: 11px;
+  background: var(--surface-1);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.confidence-pill {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: var(--radius);
+  background: var(--surface-1);
+}
+
+.assumption-note {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin: 10px 0 0;
+  font-style: italic;
+}
+
+/* Theme Toggle Button Styling */
+.theme-toggle-btn {
+  background: var(--surface-1);
+  border: 0.5px solid var(--border);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.theme-toggle-btn:hover {
+  background: var(--surface-2);
+  border-color: var(--text-secondary);
+}
+
+/* Animations using motion-react and custom css */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s ease-out forwards;
+}

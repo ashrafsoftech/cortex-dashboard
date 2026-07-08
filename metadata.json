@@ -1,0 +1,6 @@
+{
+  "name": "Reliability Early-Warning Dashboard",
+  "description": "A polished reliability early-warning dashboard with live-calculated risk scores, detailed sub-score analysis, and high-fidelity dark mode support.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
