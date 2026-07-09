@@ -9,13 +9,18 @@ export default function App() {
   // Filters and Sorting State
   const [filterMode, setFilterMode] = useState<"all" | "alert">("all");
   const [isSorted, setIsSorted] = useState<boolean>(false);
-  
+
   // Accordion state for open items
   const [openIds, setOpenIds] = useState<Set<string>>(new Set());
 
   // 1. Tier counts always reflect the full dataset, not the filtered view
   const summaryCounts = useMemo(() => {
-    const counts: Record<TierKey, number> = { green: 0, yellow: 0, orange: 0, red: 0 };
+    const counts: Record<TierKey, number> = {
+      green: 0,
+      yellow: 0,
+      orange: 0,
+      red: 0,
+    };
     PRECOMPUTED_MACHINES.forEach((m) => {
       const tier = tierOf(m.score).key;
       counts[tier]++;
@@ -75,7 +80,8 @@ export default function App() {
         <div>
           <h1>Reliability early-warning dashboard</h1>
           <p className="subhead">
-            Risk scores computed live from sub-score inputs — click any row to see the breakdown.
+            Risk scores computed live from sub-score inputs — click any row to
+            see the breakdown.
           </p>
         </div>
         <ThemeToggle />
@@ -84,8 +90,16 @@ export default function App() {
       {/* Summary Score Metrics Grid */}
       <div className="summary" id="summary-section">
         <SummaryCard label="Green" count={summaryCounts.green} tier="green" />
-        <SummaryCard label="Yellow" count={summaryCounts.yellow} tier="yellow" />
-        <SummaryCard label="Orange" count={summaryCounts.orange} tier="orange" />
+        <SummaryCard
+          label="Yellow"
+          count={summaryCounts.yellow}
+          tier="yellow"
+        />
+        <SummaryCard
+          label="Orange"
+          count={summaryCounts.orange}
+          tier="orange"
+        />
         <SummaryCard label="Red" count={summaryCounts.red} tier="red" />
       </div>
 

@@ -1,5 +1,24 @@
 @import "tailwindcss";
 
+/* :root {
+  --surface-0: #f4f3ef;
+  --surface-1: #eceae3;
+  --surface-2: #ffffff;
+  --text-primary: #1f1f1d;
+  --text-secondary: #5f5e5a;
+  --text-muted: #888780;
+  --border: #d8d6cd;
+  --radius: 8px;
+
+  --green-50: #eaf3de;
+  --green-800: #27500a;
+  --amber-50: #faeeda;
+  --amber-800: #633806;
+  --red-50: #fcebeb;
+  --red-800: #791f1f;
+
+  --transition-speed: 0.2s;
+} */
 :root {
   --surface-0: #f4f3ef;
   --surface-1: #eceae3;
@@ -10,15 +29,21 @@
   --border: #d8d6cd;
   --radius: 8px;
 
-  --green-50: #EAF3DE; --green-800: #27500A;
-  --amber-50: #FAEEDA; --amber-800: #633806;
-  --red-50: #FCEBEB;   --red-800: #791F1F;
-  
+  --green-50: #dceecb;
+  --green-800: #1e5a0f;
+  --yellow-50: #fbefc2;
+  --yellow-800: #7a5b00;
+  --amber-50: #fbdfb8;
+  --amber-800: #8a4a0a;
+  --red-50: #f9d6d6;
+  --red-800: #8c1d1d;
+
   --transition-speed: 0.2s;
 }
 
 /* Elegant Dark Mode Variables with identical warm minimalist style */
-html.dark, :root[data-theme="dark"] {
+/* html.dark,
+:root[data-theme="dark"] {
   --surface-0: #141412;
   --surface-1: #1d1c18;
   --surface-2: #252420;
@@ -33,15 +58,35 @@ html.dark, :root[data-theme="dark"] {
   --amber-800: #f1b34e;
   --red-50: #3b1616;
   --red-800: #ff8f8f;
+} */
+html.dark,
+:root[data-theme="dark"] {
+  --surface-0: #141412;
+  --surface-1: #1d1c18;
+  --surface-2: #252420;
+  --text-primary: #f5f4f0;
+  --text-secondary: #b3b1aa;
+  --text-muted: #7c7a72;
+  --border: #3a3934;
+
+  --green-50: #1e2f15;
+  --green-800: #a3e26b;
+  --amber-50: #332511;
+  --amber-800: #f1b34e;
+  --yellow-50: #332711;
+  --yellow-800: #f0c14e;
+  --red-50: #3b1616;
+  --red-800: #ff8f8f;
 }
 
 * {
   box-sizing: border-box;
   /* Smooth theme transitions */
-  transition: background-color var(--transition-speed) ease, 
-              border-color var(--transition-speed) ease, 
-              color var(--transition-speed) ease,
-              box-shadow var(--transition-speed) ease;
+  transition:
+    background-color var(--transition-speed) ease,
+    border-color var(--transition-speed) ease,
+    color var(--transition-speed) ease,
+    box-shadow var(--transition-speed) ease;
 }
 
 body {
@@ -92,6 +137,33 @@ h1 {
   border-radius: var(--radius);
   padding: 1rem;
 }
+
+/* from claude */
+/* Tinted summary cards matching the list tier colors */
+.summary-card.tier-bg-red {
+  background: var(--red-50);
+}
+.summary-card.tier-bg-red p:last-child {
+  color: var(--red-800);
+}
+
+.summary-card.tier-bg-orange,
+.summary-card.tier-bg-yellow {
+  background: var(--amber-50);
+}
+.summary-card.tier-bg-orange p:last-child,
+.summary-card.tier-bg-yellow p:last-child {
+  color: var(--amber-800);
+}
+
+.summary-card.tier-bg-green {
+  background: var(--green-50);
+}
+.summary-card.tier-bg-green p:last-child {
+  color: var(--green-800);
+}
+
+/* ----------------- */
 
 .summary-card p:first-child {
   font-size: 13px;
@@ -177,7 +249,7 @@ button.control-btn.active {
 }
 
 /* Colored Score Tiers */
-.tier-red {
+/* .tier-red {
   background: var(--red-50);
   color: var(--red-800);
 }
@@ -188,6 +260,22 @@ button.control-btn.active {
 .tier-yellow {
   background: var(--amber-50);
   color: var(--amber-800);
+}
+.tier-green {
+  background: var(--green-50);
+  color: var(--green-800);
+} */
+.tier-red {
+  background: var(--red-50);
+  color: var(--red-800);
+}
+.tier-orange {
+  background: var(--amber-50);
+  color: var(--amber-800);
+}
+.tier-yellow {
+  background: var(--yellow-50);
+  color: var(--yellow-800);
 }
 .tier-green {
   background: var(--green-50);
@@ -370,10 +458,54 @@ button.control-btn.active {
 
 /* Animations using motion-react and custom css */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-fade-in {
   animation: fadeIn 0.25s ease-out forwards;
+}
+
+/* added from claude */
+.row-action {
+  text-align: right;
+  max-width: 240px;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+/* Stack the row on narrow screens instead of squeezing it */
+@media (max-width: 480px) {
+  .row {
+    flex-wrap: wrap;
+  }
+
+  .row-main {
+    flex: 1 1 100%;
+    order: 1;
+  }
+
+  .row-action {
+    max-width: none;
+    flex: 1 1 100%;
+    text-align: left;
+    order: 2;
+    margin-left: 68px; /* aligns under row-main, past score-box + gap */
+  }
+
+  .row-action p:first-child {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+  }
+
+  .chevron {
+    order: 3;
+  }
 }
